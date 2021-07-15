@@ -18,13 +18,16 @@ public class ReliabilityEvaluator {
 
 		ReliablePathFinder finder = new ReliablePathFinder(graph);
 		
-		// evaluate the reliability of ReliablePathFinder.findPath using 1000 trials
+		// evaluate the reliability and execution time of ReliablePathFinder.findPath using 1000 trials
 		int success = 0, fail = 0;
 		System.out.println("Running the trials, please wait a moment...");
-		for (int i = 0; i < 1000; i++)
+		long start = System.currentTimeMillis();
+		for (int i = 0; i < 1000; i++) {
 			if (runTrial(finder)) success++;
 			else fail++;	        	
-		System.out.println("Success: " + success + "; Fail: " + fail);
+		}
+		long time = System.currentTimeMillis() - start;
+		System.out.println("Success: " + success + "; Fail: " + fail + "; Time: " + time + "ms");
 	}	
 	   
 	private static boolean runTrial(ReliablePathFinder finder) {
